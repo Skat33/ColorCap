@@ -1,0 +1,187 @@
+* {
+   box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	min-height: 100vh;
+	background-color: #222; /* zmiana koloru tła na ciemniejszy */
+	color: #fff; /* zmiana koloru czcionki */
+}
+
+ul {
+	list-style: none;
+}
+
+h1,
+h2,
+h3,
+a {
+	color: #fff; /* zmiana koloru czcionki */
+}
+
+a {
+	text-decoration: none;
+}
+
+.logo {
+	margin: 0;
+	font-size: 1.5em;
+}
+
+.logo a {
+	margin-left: 30px;
+   font-size: 26px;
+   letter-spacing: 3px;
+}
+.logo2{
+   position: absolute;
+   top:50px;
+   left: 130px;
+   font-size: 13px;
+   color: red;
+}
+.header {
+	padding: 20px;
+	border-bottom: 1px solid #444; /* zmiana koloru granicy */
+	background-color: #111; /* zmiana koloru tła */
+	display: flex;
+	justify-content: space-between; /* ustawienie elementów w nagłówku na przeciwnych krańcach */
+	align-items: center; /* wyśrodkowanie elementów w pionie */
+}
+
+.main-nav {
+	display: flex;
+}
+
+.main-nav ul {
+	display: flex;
+}
+
+.main-nav a {
+	padding: 10px 15px;
+	text-align: center;
+   margin-right: 40px;
+	color: #ccc; /* zmiana koloru czcionki */
+}
+
+.main-nav a:hover {
+	color: #fff; /* zmiana koloru czcionki po najechaniu */
+}
+
+article {
+   position: relative;
+   top: 40px;
+	min-height: 750px;
+	background-color: #333; /* zmiana koloru tła */
+	padding: 20px; 
+   margin: 0;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   z-index: -1;
+}
+#user-icon{
+   margin-left: 15px;
+   position: relative;
+   top: 7.5px;
+   text-align: center;
+   justify-content: center;
+}
+ .konto{
+   position: relative;
+   top: -5px;
+}
+.user-info {
+   display: none;
+   position: absolute;
+   top: calc(100%);
+   left: -70px;
+   width: 220px;
+   background-color: #383535;
+   padding: 10px;
+   border: 2px solid black;
+   text-align: center;
+   border-radius: 5px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   cursor: default;
+}
+
+.user-name{
+   color: orange;
+   position: relative;
+   top: -5px;
+   font-size: 17px;
+   letter-spacing: 1px;
+}
+.username{
+   position: relative;
+   top: -10px;
+}
+
+hr{
+   width: 70%;
+   position: relative;
+   top: -20px;
+   margin-left: auto;
+   margin-right: auto;
+}
+.logout{
+   display: none;
+   cursor: pointer;
+   color: blueviolet;
+   position: relative;
+   top: -7.5px;
+}
+div.konto a{
+   display: block;
+}
+.konto:hover .user-info, .konto:hover .logout{
+   display: block !important;
+   cursor: default;
+}
+.konto:hover .logout{
+   cursor: pointer;
+   color: blueviolet;
+   text-decoration: underline;
+}
+#container{
+   background-color: #222;
+position: relative;
+margin-top: -20px;
+margin-bottom: -20px;
+   padding:  50px 30px 10px 80px;
+   min-height: 760px;
+   width: 1200px;
+   margin-left: auto;
+   margin-right: auto;
+}
+#container h1{
+   text-align: center;
+   font-size: 28px;
+}
+.user-img{
+   position: relative;
+   top: 65px;
+   left: 160px;
+   border: 2px solid black;
+   border-radius: 5px;
+}
+.nick{
+   position: relative;
+   top: -150px;
+   left: 35px;
+   color: orange;
+   font-weight: bold;
+   font-size: 18px;
+}
+.user-rank{
+   color: white;
+   font-size: 18px;
+   position: relative;
+   top: 110px;
+   left: -15px;
+}
