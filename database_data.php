@@ -34,6 +34,4 @@ if ($result->num_rows > 0) {
     echo "Brak danych użytkownika";
 }
 
-// Zamknięcie połączenia z bazą danych
-$conn->close();
 ?>

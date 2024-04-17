@@ -1,21 +1,11 @@
-* {
-   box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	line-height: 1.6;
-	margin: 0;
-	min-height: 100vh;
+   margin: 0;
 	background-color: #222; /* zmiana koloru tła na ciemniejszy */
 	color: #fff; /* zmiana koloru czcionki */
 }
 
-ul {
-	list-style: none;
-}
 
 h1,
 h2,
@@ -82,7 +72,8 @@ article {
    margin: 0;
 	border-radius: 5px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   z-index: -1;
+   background-image: url(background.jpg);
+   background-position: 50%;
 }
 #user-icon{
    margin-left: 15px;
@@ -99,7 +90,7 @@ article {
    display: none;
    position: absolute;
    top: calc(100%);
-   left: -70px;
+   left: -80px;
    width: 220px;
    background-color: #383535;
    padding: 10px;
@@ -148,20 +139,24 @@ div.konto a{
    color: blueviolet;
    text-decoration: underline;
 }
-#container{
+.container{
    background-color: #222;
-position: relative;
-margin-top: -20px;
-margin-bottom: -20px;
+   margin-top: -20px;
+   margin-bottom: -20px;
    padding:  50px 30px 10px 80px;
-   min-height: 760px;
-   width: 1200px;
+   min-height: 750px;
+   width: 1350px;
    margin-left: auto;
    margin-right: auto;
+   z-index: auto;
+
 }
-#container h1{
+.container h1{
    text-align: center;
    font-size: 28px;
+   margin-bottom: 30px;
+   margin-right: 5px;
+   margin-top: -40px;
 }
 .user-img{
    position: relative;
@@ -184,4 +179,114 @@ margin-bottom: -20px;
    position: relative;
    top: 110px;
    left: -15px;
+}
+#obstaw-form{
+   width: 2000px;
+   height: 1070px;
+   margin-left: auto;
+   margin-right: auto;
+   position: relative;
+   left: 19%;
+}
+select{
+   background-color: rgba(27, 27, 27, 0.877);
+   color: white;
+   z-index: auto;
+   width: 150px;
+   height: 25px;
+   text-align: center;
+   margin: 15px 20px 0 115px;
+   border-radius: 3px;
+}
+.mecz{
+   font-weight: bold;
+   font-size: 19px;
+   color: orange;
+}
+.vs{
+   color: white;
+   font-weight: bold;
+   font-size: 18px;
+   margin: 0 30px 0 30px;
+}
+hr.line{
+   color: gray;
+   width: 110px;
+   position: relative;
+   left: 80px;
+   top: 15px;
+   float: left;
+   
+}
+::placeholder{
+   text-align: center;
+   font-size: 15px;
+}
+
+input[type=text]{
+   padding: 4px;
+   text-align: center;
+   border: 1PX SOLID BLACK;
+   border-radius: 3px;
+   font-size: 16px;
+}
+input[name=stawka]{
+   position: relative;
+   left: 310px;
+   top: -20px;
+   width: 200px;
+   background-color: rgb(214, 212, 212);
+   height: 30px;
+   font-weight: bold;
+   font-size: 20px;
+   border-radius: 5px;
+   border: 1px solid black;
+   text-align: center;
+}
+label{
+   position: relative;
+   top: -18px;
+   left: 320px;
+   font-weight: bold;
+   font-size: 19px;
+}
+input[value=Obstaw]{
+   position: relative;
+   top: 65px;
+   background-color: rgb(204, 182, 182);
+   left: 325px;
+   font-weight: bold;
+   letter-spacing: 1px;
+   font-size: 16px;
+   padding: 20px;
+   width: 200px;
+   border-radius: 10px;
+}
+input[value=Obstaw]:hover{
+   background-color: rgba(156, 156, 243, 0.829);
+   cursor: pointer;
+}
+.spotkania{
+   position: relative;
+   left: 35px;
+   width: 200px;
+   text-align: justify;
+   top: 12.5px;
+   float: left;
+}
+.spotkania2{
+   float: left;
+   text-align: justify;
+   left: 10px;
+   width: 200px;
+   position: relative;
+   margin-right: -150px;
+   top: 10px;
+}
+
+.vs-div{
+   float: left;
+   position: relative;
+   right: 40px;
+   top: 12.5px;
 }

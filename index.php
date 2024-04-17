@@ -36,23 +36,11 @@ if ($conn->connect_error) {
 // Pobranie ID użytkownika z sesji lub innego źródła
  // Załóżmy, że ID użytkownika przechowywane jest w sesji
 include 'data.php';
+include 'database_data.php';
 
-    // Teraz masz nazwę użytkownika, którą możesz wykorzystać w pliku index.php
-
-// Zapytanie SQL, aby pobrać dane użytkownika na podstawie jego ID
-$sql = "SELECT imie, nazwisko, username FROM users WHERE id = $user_id";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Wyświetlenie danych użytkownika
-    while($row = $result->fetch_assoc()) {
-        echo "<span class='user-name'>".$row['username']."</span><br><hr style='width: 110%; position: relative; left: -10px; top: -4px;'><br>";
-        echo  "<span style='position: relative; top: -20px;'>".$row["imie"]." ".$row["nazwisko"]."</span>";
+        echo "<span class='user-name'>".$username."</span><br><hr style='width: 110%; position: relative; left: -10px; top: -4px;'><br>";
+        echo  "<span style='position: relative; top: -20px;'>".$imie." ".$nazwisko."</span>";
         // Wyświetl inne dane użytkownika
-    }
-} else {
-    echo "Brak danych użytkownika";
-}
 
 // Zamknięcie połączenia z bazą danych
 $conn->close()
@@ -63,8 +51,20 @@ $conn->close()
         </nav>
     </header> 
     <article>
-        <!-- Tutaj zawartość artykułu -->
-    </article>
+        <div id="container">
+            <h1>Mistrzostwa Europy w Piłce Nożnej 2024</h1>
+    Mistrzostwa Europy w Piłce Nożnej 2024 to jedno z najważniejszych wydarzeń sportowych na starym kontynencie.<br>
+     Turniej finałowy odbędzie się w Niemczech i potrwa od 14 czerwca do 14 lipca 2024 roku. W sumie zostanie rozegranych 51 meczów. <br>
+     Oto kilka kluczowych informacji:
+    <ul>
+        <li>Gospodarz: Niemcy (po raz drugi, poprzednio w 1988 roku jako RFN).</li>
+        <li>Stadiony: Turniej będzie rozgrywany na dziesięciu stadionach, w tym m.in. na Olympiastadion w Berlinie (finał) oraz Allianz Arena w Monachium (mecz otwarcia).</li>
+        <li>Losowanie grup: Odbyło się 2 grudnia 2023 roku w Hamburgu.</li>
+        <li>Inauguracja: 14 czerwca w Monachium o godzinie 21:00 (spotkanie Niemcy | Szkocja). </li>
+        <li>Finał: 14 lipca o 21:00 na Stadionie Olimpijskim w Berlinie.</li>
+     </ul>
+Lista uczestników Mistrzostw Europy obejmuje 21 z 24 drużyn, w tym Reprezentację Polski, która zakwalifikowała się poprzez baraże.
+    </div></article>
     <script>
         function logout() {
     window.location.href = "logout.php";
@@ -81,9 +81,7 @@ require __DIR__ . '/vendor/autoload.php'; // Ścieżka do autoload.php z bibliot
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
- }
+
 
 // Klasa reprezentująca zdekodowany token JWT
 class DecodedToken {
@@ -95,12 +93,22 @@ class DecodedToken {
         $this->exp = $exp;
     }
 }
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+ }
 // Sprawdzenie, czy token JWT jest zapisany w sesji
 if (!isset($_SESSION['jwt'])) {
     header("Location: LoginPage.php"); // Przekieruj na stronę logowania, jeśli brakuje tokenu w sesji
     exit();
 }
+if (isset($_GET['user_id'])) {
+    // Jeśli parametr user_id został przekazany, sprawdź, czy jest to identyfikator bieżącego użytkownika
+    if ($_GET['user_id'] != $user_id) {
+        // Jeśli parametr user_id nie zgadza się z identyfikatorem bieżącego użytkownika, przekieruj użytkownika na stronę błędu lub inny adres URL
+        header("Location: konto.php?user_id=$user_id");
+        exit();
+    }
+   }
 
 $jwt = $_SESSION['jwt'];
 $secret = 'SAGJSw152151SKAsaga13';

@@ -35,26 +35,15 @@ if ($conn->connect_error) {
 
 // Pobranie ID użytkownika z sesji lub innego źródła
  // Załóżmy, że ID użytkownika przechowywane jest w sesji
-include 'data.php';
+ include 'data.php';
+ include 'database_data.php';
+ 
+         echo "<span class='user-name'>".$username."</span><br><hr style='width: 110%; position: relative; left: -10px; top: -4px;'><br>";
+         echo  "<span style='position: relative; top: -20px;'>".$imie." ".$nazwisko."</span>";
+         // Wyświetl inne dane użytkownika
+ 
 
-    // Teraz masz nazwę użytkownika, którą możesz wykorzystać w pliku index.php
 
-// Zapytanie SQL, aby pobrać dane użytkownika na podstawie jego ID
-$sql = "SELECT imie, nazwisko, username FROM users WHERE id = $user_id";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Wyświetlenie danych użytkownika
-    while($row = $result->fetch_assoc()) {
-        echo "<span class='user-name'>".$row['username']."</span><br><hr style='width: 110%; position: relative; left: -10px; top: -4px;'><br>";
-        echo  "<span style='position: relative; top: -20px;'>".$row["imie"]." ".$row["nazwisko"]."</span>";
-        // Wyświetl inne dane użytkownika
-    }
-} else {
-    echo "Brak danych użytkownika";
-}
-
-// Zamknięcie połączenia z bazą danych
 // Pobierz identyfikator użytkownika z sesji
 
 // Sprawdź, czy parametr user_id został przekazany w adresie URL
@@ -74,12 +63,13 @@ $conn->close()
         </nav>
     </header> 
     <article>
-        <div id="container">
+        <div class="container">
          <h1>Account Details</h1>
          <hr style="top: 10px;">
          <img src="user.jpg" alt="user" width="175px" height="200px" class="user-img">
          <span class="nick"><?php include 'database_data.php'; echo $username; ?></span>
          <span class="user-rank">User</span>
+         Tu będą dane użytkownika
         </div>
     </article>
     <script>
