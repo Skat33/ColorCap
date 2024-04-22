@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Slide Navbar</title>
-	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="login.css">
+    <title>Slide Navbar</title>
+    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
 </head>
+
 <body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
-        
-			<div class="signup">
-				<form method="POST">
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="log_user" placeholder="User name" required="">
-                    <input type="text" name="imie" placeholder="Name" required="">
-                    <input type="text" name="nazwisko" placeholder="Surname" required="">
-					<input type="email" name="log_email" placeholder="Email" required="">
-					<input type="password" name="log_password" placeholder="Password" required="">
-                    <div id="agree">
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+            <form method="POST">
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="log_user" placeholder="User name" required="">
+                <input type="text" name="imie" placeholder="Name" required="">
+                <input type="text" name="nazwisko" placeholder="Surname" required="">
+                <input type="email" name="log_email" placeholder="Email" required="">
+                <input type="password" name="log_password" placeholder="Password" required="">
+                <div id="agree">
                     <input type="checkbox" id="agree" name="agree" required>
-                    <span><a href="polityka.php" target="_blank">Wyrażam zgodę na przetwarzanie moich danych osobowych.</a></span>
-                    </div>
-					<button name="sign-up">Sign up</button>
-				</form>
-			</div>
+                    <span><a href="polityka.php" target="_blank">Wyrażam zgodę na przetwarzanie moich danych
+                            osobowych.</a></span>
+                </div>
+                <button name="sign-up">Sign up</button>
+            </form>
+        </div>
 
-			<div class="login">
-				<form method="POST" name="login">
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="text" name="loguser" placeholder="Username" required="">
-					<input type="password" name="logpassword" placeholder="Password" required="">
-					<button id="sign-in" name="sign-in" >Login</button>
-                    <div id="login-failed">
-                        <span id="login-err">Nieprawidłowe dane logowania</span>
-                    </div>
-                    <div id="login-success">
-                        <span id="login-succ">Zalogowano!</span>
-                    </div>
-                    <div id="buttonload" class="buttonload">
+        <div class="login">
+            <form method="POST" name="login">
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="text" name="loguser" placeholder="Username" required="">
+                <input type="password" name="logpassword" placeholder="Password" required="">
+                <button id="sign-in" name="sign-in">Login</button>
+                <div id="login-failed">
+                    <span id="login-err">Nieprawidłowe dane logowania</span>
+                </div>
+                <div id="login-success">
+                    <span id="login-succ">Zalogowano!</span>
+                </div>
+                <div id="buttonload" class="buttonload">
                     <i class="fa fa-circle-o-notch fa-spin"></i>
-                    </div>
-				</form>
-			</div>
+                </div>
+            </form>
+        </div>
 
-    <div id="password-error"></div>
-    <script>
-    
-  // Sprawdź, czy hash URL zawiera login, jeśli tak, ustaw fokus na sekcji logowania
-  window.onload = function() {
-    var chk = document.getElementById('chk');
-    chk.checked = true;
-};
+        <div id="password-error"></div>
+        <script>
+        // Sprawdź, czy hash URL zawiera login, jeśli tak, ustaw fokus na sekcji logowania
+        window.onload = function() {
+            var chk = document.getElementById('chk');
+            chk.checked = true;
+        };
 
-  function showLoadingIcon() {
-    // Pokazujemy ikonę ładowania po kliknięciu przycisku "Login"
-    document.getElementById("buttonload").style.display = "block";
-}
-function hideLoadingIcon() {
-    // Pokazujemy ikonę ładowania po kliknięciu przycisku "Login"
-    document.getElementById("buttonload").style.display = "none";
-}
-</script>
+        function showLoadingIcon() {
+            // Pokazujemy ikonę ładowania po kliknięciu przycisku "Login"
+            document.getElementById("buttonload").style.display = "block";
+        }
+
+        function hideLoadingIcon() {
+            // Pokazujemy ikonę ładowania po kliknięciu przycisku "Login"
+            document.getElementById("buttonload").style.display = "none";
+        }
+        </script>
 
 </body>
+
 </html>
 <?php
 require_once __DIR__ . '/vendor/autoload.php'; // Ścieżka do autoload.php z biblioteki firebase/php-jwt

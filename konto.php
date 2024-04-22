@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Colorcap</title>
 </head>
+
 <body>
     <header class="header">
         <h1 class="logo"><a href="#"><i>Constantia<span class="logo2">Colorcap</span></i></a></h1>
         <nav class="main-nav">
-               <a href="index.php">Home</a>
-                <a href="tabela.php">Tabela</a>
-                <a href="obstaw.php">Obstaw</a>
-                <div class="konto">
-                <a class="konto2" tabindex="0" href="konto.php?user_id=<?php include 'data.php'; echo $user_id; ?>">Konto<span id="user-icon" class="material-symbols-outlined">account_circle</span></a>
+            <a href="index.php">Home</a>
+            <a href="tabela.php">Tabela</a>
+            <a href="obstaw.php">Obstaw</a>
+            <div class="konto">
+                <a class="konto2" tabindex="0"
+                    href="konto.php?user_id=<?php include 'data.php'; echo $user_id; ?>">Konto<span id="user-icon"
+                        class="material-symbols-outlined">account_circle</span></a>
 
-            <div class="user-info">
-            <?php
+                <div class="user-info">
+                    <?php
 // Połączenie z bazą danych (załóżmy, że używamy MySQL)
 $servername = "localhost";
 $username = "root";
@@ -57,25 +62,27 @@ if (isset($_GET['user_id'])) {
    }
 $conn->close()
 ?>
-    <span class="logout" onclick="logout()">Wyloguj</span>
+                    <span class="logout" onclick="logout()">Wyloguj</span>
+                </div>
             </div>
-</div>
         </nav>
-    </header> 
+    </header>
     <article>
         <div class="container">
-         <h1>Account Details</h1>
-         <hr style="top: 10px;">
-         <img src="user.jpg" alt="user" width="175px" height="200px" class="user-img">
-         <span class="nick"><?php include 'database_data.php'; echo $username; ?></span>
-         <span class="user-rank">User</span>
-         Tu będą dane użytkownika
+
+            <h1>Account Details</h1>
+            <hr style="top: 10px;">
+            <img src="user.jpg" alt="user" width="175px" height="200px" class="user-img">
+            <span class="nick"><?php include 'database_data.php'; echo $username; ?></span>
+            <span class="user-rank">User</span>
+            Tu będą dane użytkownika
         </div>
     </article>
     <script>
-        function logout() {
-    window.location.href = "logout.php";
-}
+    function logout() {
+        window.location.href = "logout.php";
+    }
     </script>
 </body>
+
 </html>
