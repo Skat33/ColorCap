@@ -107,16 +107,14 @@ button:hover {
   color: rgb(14, 177, 14);
   position: absolute;
   left: 835px;
-  top: 450px;
-  margin-top: 57.5px;
+  top: 237.5px;
   font-size: 14px;
   font-weight: bold;
   z-index: -1;
-  top: 25%;
 }
 #user-error {
   position: absolute;
-  top: 300px;
+  top: 237.5px;
   left: 880px;
   color: red;
   z-index: -1;

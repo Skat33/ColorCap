@@ -416,3 +416,13 @@ input[name="Delete-submit"]:hover {
   left: 175px;
   top: -5px;
 }
+#userSelect {
+  position: relative;
+  top: 100px;
+  left: 105px;
+}
+.error {
+  position: relative;
+  top: 200px;
+  left: 525px;
+}

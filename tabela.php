@@ -66,94 +66,135 @@ include 'dane_mistrzostwa.php';
             <h1 style="margin: 10px 0 40px 0;">Zakłady Mistrzostw Europy 2024</h1>
             <?php
                include 'data.php';
-               $sql_punkty = "SELECT * FROM bet WHERE ID = $user_id";
-               $query_punkty = mysqli_query($conn, $sql_punkty);
-               $punkty = 0; // Zainicjuj zmienną punktów przed pętlą 
-               
-               while ($row = mysqli_fetch_assoc($query_punkty)) {
-                   
-                   $wynik1 = $row['Wynik_Typowany_Team1'];
-                   $wynik2 = $row['Wynik_Typowany_Team2'];
-                   $punkty2="";
-                   $punkty_dodane = false;
-                   $bet = $row['ID_betu'];
-                   if ($punkty_dodane == true) {
-                        
-                       break;
-                   }
-               
-                   $wynik_real1 = $row['Wynik_faktyczny_Team1'];
-                   $wynik_real2 = $row['Wynik_faktyczny_Team2'];
 
-                   
-                   if ($wynik1 == $wynik_real1 && $wynik2 == $wynik_real2) {
-                       $punkty_dodane = true;
-                       $punkty2 .= "  +4  ";
-                       $punkty += 4;
-                   }
-                   if ($wynik1 == $wynik2 && $wynik_real1 == $wynik_real2) {
-                       $punkty_dodane = true;
-                       $punkty2 .= "  +2  ";
-                       $punkty += 2;
-                   }
-                   if (abs($wynik1 - $wynik2) >= 2 && abs($wynik_real1 - $wynik_real2) >= 2 && abs($wynik1 - $wynik2) == abs($wynik_real1 - $wynik_real2) && (($wynik1 > $wynik2 && $wynik_real1 > $wynik_real2) || ($wynik2 > $wynik1 && $wynik_real2 > $wynik_real1))) {
-                       $punkty_dodane = true;
-                       $punkty2 .= "  +2  ";
-                       $punkty += 2;
-                   }
-                   if (($wynik1 > $wynik2 && $wynik_real1 > $wynik_real2) || ($wynik2 > $wynik1 && $wynik_real2 > $wynik_real1)) {
-                       $punkty_dodane = true;
-                       $punkty2 .= "  +1  ";
-                       $punkty +=1;
-                       
-                   } 
-                   else if($punkty_dodane == false){
-                    $punkty2 ="0";
-                   }
-                   
-                   $punkty_dodane_sql = "UPDATE bet SET Punkty_Dodane = '$punkty2 ' WHERE ID_betu = $bet AND ID=$id_user";
-                   mysqli_query($conn, $punkty_dodane_sql);
-               }
-               $wynik = "SELECT * FROM bet WHERE ID = $user_id";
-               $wynik_result = mysqli_query($conn, $wynik);
                
-               $id_betu = 1;
-               while ($row = mysqli_fetch_assoc($wynik_result)) {
-                $wynik_faktyczny = $row['Wynik_faktyczny_Team1'] . " - " . $row['Wynik_faktyczny_Team2'];
-                $wynik_typowany = $row['Wynik_Typowany_Team1'] . " - " . $row['Wynik_Typowany_Team2'];
-                $zdobyte_punkty = $row['Punkty'];
-                $rekord_dodany = false;
-                if ($rekord_dodany){
-                    break;
-                } 
-            
-                // Połączenie danych i aktualizacja kolumny Wynik
-                $update_wynik = "UPDATE bet SET Wynik = '$wynik_faktyczny', Wynik_Typowany = '$wynik_typowany' WHERE ID_betu = $id_betu AND ID = $user_id";
-                mysqli_query($conn, $update_wynik);
-                $rekord_dodany = true;
-               $id_betu++;
+               foreach ($wynikiRzeczywiste as $id_meczu => $wynik) {
+                $wynik_faktyczny = $wynik['Wynik1'] . ' - ' . $wynik['Wynik2'];
+                $update_query = "UPDATE bet SET Wynik_faktyczny_Team1 = '{$wynik['Wynik1']}', Wynik_faktyczny_Team2 = '{$wynik['Wynik2']}' WHERE ID_betu = $id_meczu";
+                mysqli_query($conn, $update_query);
             }
-               // Aktualizacja punktów tylko raz po obliczeniu punktów dla wszystkich rekordów
-               $punkty_update = "UPDATE bet SET Punkty = $punkty WHERE ID = $user_id";
-               $punkty_result = mysqli_query($conn, $punkty_update);
 
-               
-               
-               $query = "SELECT `Data`, `Wytypowany_Mistrz`, `Wynik_faktyczny_Team1` FROM bet WHERE ID=$user_id";
-               $result2 = mysqli_query($conn, $query);
-               $row2 = $result2->fetch_assoc();
-               $data = $row2['Data']; 
-               $mistrz = $row2['Wytypowany_Mistrz'];
 
-               echo '<table>';                
+               echo '<table>';    
+               if ($username === "Skat33"){
+                $sql_specified = "SELECT * from users";
+                $result_specified = mysqli_query($conn, $sql_specified);
+                echo '<form id="userForm" class="user-search" onsubmit="return submitForm()">
+                <select id="userSelect" name="users" onchange="submitForm()">
+                <option selected>Wybierz użytkownika</option>';
+                    while ($row = mysqli_fetch_assoc($result_specified)) {
+                        $user_name = $row['Imie'];
+                        $user_surname = $row['Nazwisko'];
+                        $id = $row['ID'];
+                        echo '<option value="' . $id . '">' . $user_name . '    ' . $user_surname . '</option>';
+                    }
+    echo '</select>
+    </form>';
+    }
+    if (isset($_GET['users'])){
+    $id_user = $_GET['users'];
+    $dane = "SELECT * FROM users WHERE ID = $id_user";
+    $dane_result = mysqli_query($conn, $dane);
+    $row_dane = mysqli_fetch_assoc($dane_result);
+    $user_name = $row_dane['Imie'];
+    $user_surname = $row_dane['Nazwisko'];
+    }
+    else{
+        $id_user = $user_id;
+        $user_name = $imie;
+        $user_surname = $nazwisko;
+    }
+    if ($username !== "Skat33"){
+        $id_user = $user_id;
+        $user_name = $imie;
+        $user_surname = $nazwisko;
+    }
+    $sql_punkty = "SELECT * FROM bet WHERE ID = $id_user";
+    $query_punkty = mysqli_query($conn, $sql_punkty);
+    $punkty = 0; // Zainicjuj zmienną punktów przed pętlą 
+
+    
+    while ($row = mysqli_fetch_assoc($query_punkty)) {
+        
+        $wynik1 = $row['Wynik_Typowany_Team1'];
+        $wynik2 = $row['Wynik_Typowany_Team2'];
+        $punkty2="";
+        $punkty_dodane = false;
+        $bet = $row['ID_betu'];
+        if ($punkty_dodane == true) {
+             
+            break;
+        }
+    
+        $wynik_real1 = $row['Wynik_faktyczny_Team1'];
+        $wynik_real2 = $row['Wynik_faktyczny_Team2'];
+
+        
+        if ($wynik1 == $wynik_real1 && $wynik2 == $wynik_real2) {
+            $punkty_dodane = true;
+            $punkty2 .= "  +4  ";
+            $punkty += 4;
+        }
+        if ($wynik1 == $wynik2 && $wynik_real1 == $wynik_real2) {
+            $punkty_dodane = true;
+            $punkty2 .= "  +2  ";
+            $punkty += 2;
+        }
+        if (abs($wynik1 - $wynik2) >= 2 && abs($wynik_real1 - $wynik_real2) >= 2 && abs($wynik1 - $wynik2) == abs($wynik_real1 - $wynik_real2) && (($wynik1 > $wynik2 && $wynik_real1 > $wynik_real2) || ($wynik2 > $wynik1 && $wynik_real2 > $wynik_real1))) {
+            $punkty_dodane = true;
+            $punkty2 .= "  +2  ";
+            $punkty += 2;
+        }
+        if (($wynik1 > $wynik2 && $wynik_real1 > $wynik_real2) || ($wynik2 > $wynik1 && $wynik_real2 > $wynik_real1)) {
+            $punkty_dodane = true;
+            $punkty2 .= "  +1  ";
+            $punkty +=1;
+            
+        } 
+        else if($punkty_dodane == false){
+         $punkty2 ="0";
+        }
+        
+        $punkty_dodane_sql = "UPDATE bet SET Punkty_Dodane = '$punkty2 ' WHERE ID_betu = $bet AND ID=$id_user";
+        mysqli_query($conn, $punkty_dodane_sql);
+    }
+    
+
+    // Aktualizacja punktów tylko raz po obliczeniu punktów dla wszystkich rekordów
+    $punkty_update = "UPDATE bet SET Punkty = $punkty WHERE ID = $id_user";
+    $punkty_result = mysqli_query($conn, $punkty_update);
+    $query = "SELECT `Data`, `Wytypowany_Mistrz`, `Wynik_faktyczny_Team1` FROM bet WHERE ID=$id_user";
+    $result2 = mysqli_query($conn, $query);
+    $row2 = mysqli_fetch_array($result2);
+    if (mysqli_num_rows($result2)==0){
+        echo "";
+    }else{
+    $data = $row2['Data']; 
+    $mistrz = $row2['Wytypowany_Mistrz'];
+    }
+    $sql = "SELECT `ID_betu` AS `Numer meczu`, `Team_1` AS `Drużyna Pierwsza`, `Team_2` AS `Drużyna Druga`, `Wynik`, `Wynik_Typowany` AS `Wynik Obstawiony`, `Punkty_Dodane` AS `Punkty` FROM bet WHERE ID = $id_user";
+              
+            $wynik = "SELECT * FROM bet WHERE ID = $id_user";
+            $wynik_result = mysqli_query($conn, $wynik);  
+            
+            while ($row = mysqli_fetch_assoc($wynik_result)) {
+            $id_betu = $row['ID_betu'];
+             $wynik_faktyczny = $row['Wynik_faktyczny_Team1'] . " - " . $row['Wynik_faktyczny_Team2'];
+             $wynik_typowany = $row['Wynik_Typowany_Team1'] . " - " . $row['Wynik_Typowany_Team2'];
+             $zdobyte_punkty = $row['Punkty'];
+             $rekord_dodany = false;
+         
+             // Połączenie danych i aktualizacja kolumny Wynik
+             $update_wynik = "UPDATE bet SET Wynik = '$wynik_faktyczny', Wynik_Typowany = '$wynik_typowany' WHERE ID_betu = $id_betu AND ID = $id_user";
+             mysqli_query($conn, $update_wynik);
+             $rekord_dodany = true;
+         }    
                $result = mysqli_query($conn, $sql);
                $row = mysqli_fetch_assoc($result);
-               echo '<h2 style="text-align: center; color:orange;">'.$imie.'  '.$nazwisko.' - ID('.$id_user.')</h2>';
+               echo '<h2 style="text-align: center; color:orange;">'.$user_name.'  '.$user_surname.' - ID('.$id_user.')</h2>';
                if(mysqli_num_rows($result) == 0){
                   echo '<p class="error">Nieprawidłowe dane lub pusta baza danych!</p>';
                } else {
-                    $liczba = "SELECT * FROM users";
-                    $liczba_result = mysqli_query($conn, $liczba); 
                   if ($username === "Skat33"){
                     
             echo '<form method="POST" class="edit" action="modify.php">
@@ -173,10 +214,12 @@ include 'dane_mistrzostwa.php';
                     }
                     echo '</tr>';
                 // Wyświetlanie danych
+                mysqli_data_seek($result, 0);
+
                 while($row = mysqli_fetch_assoc($result)){
                 echo '<tr>';
-                    foreach ($row as $kolumna){
-                    echo '<td>'.$kolumna.'</td>';
+                    foreach ($row as $key => $value){
+                    echo '<td>'.$value.'</td>';
                     }
                     echo '</tr>';
                 }
@@ -196,6 +239,7 @@ include 'dane_mistrzostwa.php';
                 </tr>';
                 echo '</table>';
             }
+ 
 
 
 
