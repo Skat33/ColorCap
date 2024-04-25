@@ -20,6 +20,7 @@
         <h1 class="logo"><a href="#"><i>Constantia<span class="logo2">Colorcap</span></i></a></h1>
         <nav class="main-nav">
             <a href="index.php">Home</a>
+            <a href="leaderboard.php">Leaderboard</a>
             <a href="tabela.php">Tabela</a>
             <a href="obstaw.php">Obstaw</a>
             <div class="konto">

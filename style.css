@@ -382,6 +382,7 @@ th {
   height: 50px;
   padding: 5px;
 }
+
 input[name="Modify-submit"],
 input[name="Delete-submit"] {
   width: 140px;
