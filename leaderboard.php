@@ -45,28 +45,46 @@
             <h1 style="margin-top: 20px;">Top 10</h1>
             <?php
             include "session.php";
-            $sql = "SELECT DISTINCT users.ID, users.Imie, users.Nazwisko, bet.Punkty, bet.Data FROM users INNER JOIN bet ON users.ID = bet.ID 
-            ORDER BY bet.Punkty DESC LIMIT 10";
+            include 'dane_mistrzostwa.php';
+            include 'punkty.php';
+
+
+// Aktualizuj punkty użytkowników
+            $sql = "SELECT DISTINCT `ID`, `Imie`, `Nazwisko`, `Runda_1` AS `Runda 1`, `Runda_2` AS `Runda 2`, `Runda_3` AS `Runda 3`, `Runda_4` AS `Runda 4`, `Runda_5` AS `Runda 5`, `Punkty` FROM wyniki
+            ORDER BY wyniki.Punkty DESC LIMIT 10";
     $result = mysqli_query($conn, $sql);
     $columns = $result->fetch_fields();
     echo '<table id="tabela" border="2" cellspacing="0" >';
         foreach ($columns as $column){
             if ($column->name == 'ID'){
-                echo '<th>Miejsce</th>';
+                echo '<th style="background-color: #111;">Miejsce</th>';
             }else{
-            echo '<th>'.$column->name.'</th>';
+            echo '<th style="background-color: #111;">'.$column->name.'</th>';
             }
         }
         echo '<tr></tr>';
     $i=1;
     mysqli_data_seek($result, 0);
+    $suma = 0;
     while ($row = mysqli_fetch_assoc($result)){
+        $id = $row['ID'];
+        $runda1 = $row['Runda 1'];
+        $runda2 = $row['Runda 2'];
+        $runda3 = $row['Runda 3'];
+        $runda4 = $row['Runda 4'];
+        $runda5 = $row['Runda 5'];
+        $suma = $runda1+$runda2+$runda3+$runda4+$runda5;
+        $update_suma = "UPDATE wyniki SET Punkty = $suma WHERE ID = $id";
+        mysqli_query( $conn, $update_suma );    
         echo '<tr>';
-        echo '<td>'.$i.'</td>';
-        echo '<td>'.$row['Imie'].'</td>';
-        echo '<td>'.$row['Nazwisko'].'</td>';
-        echo '<td>'.$row['Punkty'].'</td>';
-        echo '<td>'.$row['Data'].'</td>';
+        foreach ($row as $key => $value){
+            if ($key === "ID"){
+                echo '<td style="color: yellow; font-size: 20px;">'.$i.'</td>';
+            }else{
+            echo '<td>'.$value.'</td>';
+            }
+            
+        }
         echo '</tr>';
         $i++;
     }

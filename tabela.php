@@ -69,11 +69,7 @@ include 'dane_mistrzostwa.php';
                include 'data.php';
 
                
-               foreach ($wynikiRzeczywiste as $id_meczu => $wynik) {
-                $wynik_faktyczny = $wynik['Wynik1'] . ' - ' . $wynik['Wynik2'];
-                $update_query = "UPDATE bet SET Wynik_faktyczny_Team1 = '{$wynik['Wynik1']}', Wynik_faktyczny_Team2 = '{$wynik['Wynik2']}' WHERE ID_betu = $id_meczu";
-                mysqli_query($conn, $update_query);
-            }
+
 
 
                echo '<table>';    
@@ -110,72 +106,28 @@ include 'dane_mistrzostwa.php';
         $user_name = $imie;
         $user_surname = $nazwisko;
     }
-    $sql_punkty = "SELECT * FROM bet WHERE ID = $id_user";
-    $query_punkty = mysqli_query($conn, $sql_punkty);
-    $punkty = 0; // Zainicjuj zmienną punktów przed pętlą 
+include 'punkty.php'; // W tym miejscu dochodzi do aktualizacji punktów przed wyświetleniem samej tabeli. W przypadku zmiany danych w dane_mistrzostwa.php 
+                    // Dane się automatycznie zaktualizują, więc po odświeżeniu strony dostaniemy nowe aktualne dane
 
     
-    while ($row = mysqli_fetch_assoc($query_punkty)) {
-        
-        $wynik1 = $row['Wynik_Typowany_Team1'];
-        $wynik2 = $row['Wynik_Typowany_Team2'];
-        $punkty2="";
-        $punkty_dodane = false;
-        $bet = $row['ID_betu'];
-        if ($punkty_dodane == true) {
-             
-            break;
-        }
-    
-        $wynik_real1 = $row['Wynik_faktyczny_Team1'];
-        $wynik_real2 = $row['Wynik_faktyczny_Team2'];
+  // Aktualizacja punktów tylko raz po obliczeniu punktów dla wszystkich rekordów
 
-        
-        if ($wynik1 == $wynik_real1 && $wynik2 == $wynik_real2) {
-            $punkty_dodane = true;
-            $punkty2 .= "  +4  ";
-            $punkty += 4;
-        }
-        if ($wynik1 == $wynik2 && $wynik_real1 == $wynik_real2) {
-            $punkty_dodane = true;
-            $punkty2 .= "  +2  ";
-            $punkty += 2;
-        }
-        if (abs($wynik1 - $wynik2) >= 2 && abs($wynik_real1 - $wynik_real2) >= 2 && abs($wynik1 - $wynik2) == abs($wynik_real1 - $wynik_real2) && (($wynik1 > $wynik2 && $wynik_real1 > $wynik_real2) || ($wynik2 > $wynik1 && $wynik_real2 > $wynik_real1))) {
-            $punkty_dodane = true;
-            $punkty2 .= "  +2  ";
-            $punkty += 2;
-        }
-        if (($wynik1 > $wynik2 && $wynik_real1 > $wynik_real2) || ($wynik2 > $wynik1 && $wynik_real2 > $wynik_real1)) {
-            $punkty_dodane = true;
-            $punkty2 .= "  +1  ";
-            $punkty +=1;
-            
-        } 
-        else if($punkty_dodane == false){
-         $punkty2 ="0";
-        }
-        
-        $punkty_dodane_sql = "UPDATE bet SET Punkty_Dodane = '$punkty2 ' WHERE ID_betu = $bet AND ID=$id_user";
-        mysqli_query($conn, $punkty_dodane_sql);
-    }
-    
-
-    // Aktualizacja punktów tylko raz po obliczeniu punktów dla wszystkich rekordów
-    $punkty_update = "UPDATE bet SET Punkty = $punkty WHERE ID = $id_user";
-    $punkty_result = mysqli_query($conn, $punkty_update);
-    $query = "SELECT `Data`, `Wytypowany_Mistrz`, `Wynik_faktyczny_Team1` FROM bet WHERE ID=$id_user";
+    $query = "SELECT `Data` FROM runda$runda WHERE ID=$id_user";
     $result2 = mysqli_query($conn, $query);
     $row2 = mysqli_fetch_array($result2);
     if (mysqli_num_rows($result2)==0){
         echo "";
     }else{
-    $data = $row2['Data']; 
-    $mistrz = $row2['Wytypowany_Mistrz'];
+    $data = $row2['Data'];
+    $wytypowany_mistrz = "SELECT * FROM runda1 WHERE ID = $id_user";
+    $wytypowany_result = mysqli_query($conn, $wytypowany_mistrz);
+    $row_mistrz = mysqli_fetch_assoc($wytypowany_result);
+    $mistrz = $row_mistrz['Wytypowany_Mistrz'];  
     }
-    $sql = "SELECT `ID_betu` AS `Numer meczu`, `Team_1` AS `Drużyna Pierwsza`, `Team_2` AS `Drużyna Druga`, `Wynik`, `Wynik_Typowany` AS `Wynik Obstawiony`, `Punkty_Dodane` AS `Punkty` FROM bet WHERE ID = $id_user";
-              
-            $wynik = "SELECT * FROM bet WHERE ID = $id_user";
+    $sql = "SELECT `ID_betu` AS `Numer meczu`, `Team_1` AS `Drużyna Pierwsza`, `Team_2` AS `Drużyna Druga`, `Wynik`, `Wynik_Typowany` AS `Wynik Obstawiony`, `Punkty_Dodane` AS `Punkty` FROM runda$runda WHERE ID = $id_user";
+             
+
+            $wynik = "SELECT * FROM runda$runda WHERE ID = $id_user";
             $wynik_result = mysqli_query($conn, $wynik);  
             
             while ($row = mysqli_fetch_assoc($wynik_result)) {
@@ -186,7 +138,7 @@ include 'dane_mistrzostwa.php';
              $rekord_dodany = false;
          
              // Połączenie danych i aktualizacja kolumny Wynik
-             $update_wynik = "UPDATE bet SET Wynik = '$wynik_faktyczny', Wynik_Typowany = '$wynik_typowany' WHERE ID_betu = $id_betu AND ID = $id_user";
+             $update_wynik = "UPDATE runda$runda SET Wynik = '$wynik_faktyczny', Wynik_Typowany = '$wynik_typowany' WHERE ID_betu = $id_betu AND ID = $id_user";
              mysqli_query($conn, $update_wynik);
              $rekord_dodany = true;
          }    
@@ -211,7 +163,7 @@ include 'dane_mistrzostwa.php';
                 // Wyświetlenie nazw kolumn
                 echo '<tr>';
                     foreach ($columns as $column) {
-                    echo '<th>'.$column->name . "</th>";
+                    echo '<th style="background-color: #111;">'.$column->name . "</th>";
                     }
                     echo '</tr>';
                 // Wyświetlanie danych
@@ -224,12 +176,23 @@ include 'dane_mistrzostwa.php';
                     }
                     echo '</tr>';
                 }
+                if ($mistrz == $mistrz_faktyczny){
                 echo '<tr>
+                    <td colspan="6" style="text-align: center; color: black; background-color: orange; height: 15px;">
+                        Potencjalny Wygrany Turnieju: <span
+                            style="font-weight: bold; color: darkred; text-decoration: underline;">'.$mistrz.'</span> (+10)
+                    </td>
+                
+                </tr>';
+                } else{
+                    echo '<tr>
                     <td colspan="6" style="text-align: center; color: black; background-color: orange; height: 15px;">
                         Potencjalny Wygrany Turnieju: <span
                             style="font-weight: bold; color: darkred; text-decoration: underline;">'.$mistrz.'</span>
                     </td>
+                
                 </tr>';
+                }
                 echo '<tr>
                     <td colspan="5" style="text-align: right; height: 15px;"><span style="margin-right: 10px">Zdobyte
                             punkty</span> </td>'.'<td style="height: 15px;">'.$zdobyte_punkty.'</td>
