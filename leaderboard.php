@@ -48,10 +48,32 @@
             include 'dane_mistrzostwa.php';
             include 'punkty.php';
 
+$suma = 0;
 
-// Aktualizuj punkty użytkowników
-            $sql = "SELECT DISTINCT `ID`, `Imie`, `Nazwisko`, `Runda_1` AS `Runda 1`, `Runda_2` AS `Runda 2`, `Runda_3` AS `Runda 3`, `Runda_4` AS `Runda 4`, `Runda_5` AS `Runda 5`, `Punkty` FROM wyniki
+            $sql = "SELECT DISTINCT `ID`, `Imie`, `Nazwisko`, `Runda_1` AS `Runda 1`, `Runda_2` AS `Runda 2`, `Runda_3` AS `Runda 3`, `Runda_4` AS `Runda 4`, `Runda_5` AS `Runda 5`, `Mistrz`, `Punkty` FROM wyniki
             ORDER BY wyniki.Punkty DESC LIMIT 10";
+                $sql_users = "SELECT DISTINCT ID FROM runda1";
+                $query_users = mysqli_query($conn, $sql_users);
+                
+                while ($row_user = mysqli_fetch_assoc($query_users)) {
+                    $user_id = $row_user['ID'];
+                
+                    // Pobierz zakłady dla danego użytkownika
+                    $sql_bets = "SELECT * FROM runda1 WHERE ID = $user_id";
+                    $query_bets = mysqli_query($conn, $sql_bets);
+                
+                    // Zainicjuj zmienne punktów dla danego użytkownika
+                    $wytypowany_mistrz = "SELECT * FROM runda1 WHERE ID = $user_id";
+                    $wytypowany_result = mysqli_query($conn, $wytypowany_mistrz);
+                    $sql2 = "SELECT DISTINCT ID, Wytypowany_Mistrz FROM runda1 WHERE ID = $user_id";
+                    $result2 = mysqli_query($conn, $sql2);
+                    while ($row2 = mysqli_fetch_array($result2)) {
+                         $mistrz = $row2['Wytypowany_Mistrz'];
+                         $mistrz_sql = "UPDATE wyniki SET Mistrz = '$mistrz' WHERE ID = $user_id";
+                         mysqli_query( $conn, $mistrz_sql); 
+                    }
+                }            
+
     $result = mysqli_query($conn, $sql);
     $columns = $result->fetch_fields();
     echo '<table id="tabela" border="2" cellspacing="0" >';
@@ -65,21 +87,13 @@
         echo '<tr></tr>';
     $i=1;
     mysqli_data_seek($result, 0);
-    $suma = 0;
-    while ($row = mysqli_fetch_assoc($result)){
-        $id = $row['ID'];
-        $runda1 = $row['Runda 1'];
-        $runda2 = $row['Runda 2'];
-        $runda3 = $row['Runda 3'];
-        $runda4 = $row['Runda 4'];
-        $runda5 = $row['Runda 5'];
-        $suma = $runda1+$runda2+$runda3+$runda4+$runda5;
-        $update_suma = "UPDATE wyniki SET Punkty = $suma WHERE ID = $id";
-        mysqli_query( $conn, $update_suma );    
+    while ($row = mysqli_fetch_assoc($result)){    
         echo '<tr>';
         foreach ($row as $key => $value){
             if ($key === "ID"){
                 echo '<td style="color: yellow; font-size: 20px;">'.$i.'</td>';
+            }else if ($key === "Punkty"){
+                echo '<td style="color: yellow; font-size: 20px;">'.$value.'</td>';
             }else{
             echo '<td>'.$value.'</td>';
             }

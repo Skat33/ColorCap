@@ -53,7 +53,7 @@
                     include 'dane_mistrzostwa.php'; /* Dane meczy odbywanych w danym roku Team1 vs Team2 i tak pokolei */
                     $punkty = 0;
                     $max_obstawianie_time = strtotime($data_obstawienia); // Ustawia maksymalną godzinę na dzisiaj o 15:00
-                    $end_date = strtotime('2024-04-26 15:00:00'); // Przykładowa data, do której można obstawiać
+                    $end_date = strtotime($data_obstawienia); // Przykładowa data, do której można obstawiać
                     $existing_bet_query = "SELECT COUNT(*) AS bet_count FROM runda$runda WHERE ID = $user_id";
                     $existing_bet_result = $conn->query($existing_bet_query);
                     if ($existing_bet_result) {
@@ -117,12 +117,7 @@
                                         echo "Błąd podczas aktualizacji wyniku dla meczu $mecz_id2: " . $conn->error;
                                     }
                                 }
-                                    foreach ($wynikiRzeczywiste as $wyniki_key => $wyniki_update) {
-                                        $wynik_rzeczywisty1 = $wyniki_update['Wynik1'];
-                                        $wynik_rzeczywisty2 = $wyniki_update['Wynik2'];
-                                        $update = "UPDATE runda$runda SET `Wynik_faktyczny_Team1` = $wynik_rzeczywisty1, `Wynik_faktyczny_Team2` = $wynik_rzeczywisty2 WHERE ID_betu = $wyniki_key AND ID = $user_id";
-                                        $conn->query($update);
-                                    }
+
                                 }
 
 
@@ -153,10 +148,11 @@
                                     echo '<input type="number" class="Wynik" id="Wynik-1" name="Wynik[' . $id . '][1]" placeholder="Wynik ' . $team1 . '" required><br><hr class="hr-wynik">';
                                     echo '<input type="number" class="Wynik" id="Wynik-2" name="Wynik[' . $id . '][2]" placeholder="Wynik ' . $team2 . '" required><br>';
                                 }
+                                echo '<input type="submit" value="Obstaw">';
                             } else {
-                                echo "Obstawianie meczy jest już zamknięte.";
+                                echo "<span class='bet-time'>Obstawianie meczy jest już zamknięte.</span>";
                             }
-                            echo '<input type="submit" value="Obstaw">';
+                            
                         }
                     }
                     ?>

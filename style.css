@@ -384,22 +384,14 @@ body {
    padding: 5px;
  }
  
- input[name="Modify-submit"],
  input[name="Delete-submit"] {
    width: 140px;
    height: 35px;
    position: relative;
-   left: 820px;
+   left: 587.5px;
    margin-left: 10px;
-   top: -5px;
+   top: -40px;
  }
- input[name="Modify-submit"] {
-   width: 140px;
- }
- input[name="Delete-submit"] {
-   left: 825px;
- }
- input[name="Modify-submit"]:hover,
  input[name="Delete-submit"]:hover {
    cursor: pointer;
    background-color: #1f3aa7d3;
@@ -420,7 +412,7 @@ body {
  }
  #userSelect {
    position: relative;
-   top: 100px;
+   top: 70px;
    left: 105px;
  }
  .error {
@@ -428,3 +420,26 @@ body {
    top: 200px;
    left: 525px;
  }
+.bet-time{
+  font-size: 22px;
+  position: relative;
+  top:200px;
+  left: 305px;
+}
+.runda{
+  font-size: 19px;
+  position: relative;
+  left: 720px;
+  letter-spacing: 1px;
+  top: 55px;
+  color: orange;
+}
+.rundaif{
+  font-size: 19px;
+  position: relative;
+  left: 200px;
+  top: 25px;
+  letter-spacing: 1px;
+  color: orange;
+  z-index: -1;
+}

@@ -107,14 +107,14 @@ body {
 	color: rgb(14, 177, 14);
 	position: absolute;
 	left: 835px;
-	top: 237.5px;
+	top: 260.5px;
 	font-size: 14px;
 	font-weight: bold;
 	z-index: -1;
  }
  #user-error {
 	position: absolute;
-	top: 237.5px;
+	top: 260.5px;
 	left: 880px;
 	color: red;
 	z-index: -1;
