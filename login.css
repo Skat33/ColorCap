@@ -179,3 +179,9 @@ body {
  #agree a {
 	color: white;
  }
+ .email-error{
+	z-index: 999;
+	position: absolute;
+	font-size: 40px;
+	color: red;
+ }

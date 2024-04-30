@@ -79,7 +79,7 @@ use Firebase\JWT\JWT;
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'Projekt';
+$dbname = 'projekt';
 $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -92,19 +92,27 @@ function registerUser($conn, $username, $password, $imie, $nazwisko, $email) {
     if (empty($username) || empty($password) || empty($email) || empty($imie) || empty($nazwisko)) {
         throw new Exception("Wszystkie pola są wymagane.");
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        throw new Exception("Niepoprawny format adresu e-mail.");
-    }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception("Niepoprawny format adresu e-mail.");
+        }
 
-    // Sprawdzenie, czy użytkownik o podanej nazwie już istnieje
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
-    if ($result->num_rows > 0) {
-        throw new Exception("<span id='user-error'>Użytkownik o tej nazwie już istnieje.</span>");
-    }
+        // Sprawdzenie, czy użytkownik o podanej nazwie już istnieje
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        if ($result->num_rows > 0) {
+            throw new Exception("<span id='user-error'>Użytkownik o tej nazwie już istnieje.</span>");
+        }
+        $stmt = $conn->prepare("SELECT * FROM users WHERE `e-mail` = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        if ($result->num_rows > 0) {
+            throw new Exception("<span id='user-error' style='left: 935px;'>Ten email jest zajęty</span>");
+        } 
 
     // Rejestracja użytkownika
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);

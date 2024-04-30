@@ -1,445 +1,451 @@
 body {
-   font-family: Arial, Helvetica, sans-serif;
-   line-height: 1.6;
-   margin: 0;
-   padding: 0;
-   color: #fff; /* zmiana koloru czcionki */
- }
- 
- h1,
- h2,
- h3,
- a {
-   color: #fff; /* zmiana koloru czcionki */
- }
- 
- a {
-   text-decoration: none;
- }
- 
- .logo {
-   margin: 0;
-   font-size: 1.5em;
- }
- 
- .logo a {
-   margin-left: 30px;
-   font-size: 26px;
-   letter-spacing: 3px;
- }
- .logo2 {
-   position: absolute;
-   top: 50px;
-   left: 130px;
-   font-size: 13px;
-   color: red;
- }
- .header {
-   padding: 20px;
-   border-bottom: 1px solid #444; /* zmiana koloru granicy */
-   background-color: #111; /* zmiana koloru tła */
-   display: flex;
-   justify-content: space-between; /* ustawienie elementów w nagłówku na przeciwnych krańcach */
-   align-items: center; /* wyśrodkowanie elementów w pionie */
- }
- 
- .main-nav {
-   display: flex;
- }
- 
- .main-nav ul {
-   display: flex;
- }
- 
- .main-nav a {
-   padding: 10px 15px;
-   text-align: center;
-   margin-right: 40px;
-   color: #ccc; /* zmiana koloru czcionki */
- }
- 
- .main-nav a:hover {
-   color: #fff; /* zmiana koloru czcionki po najechaniu */
- }
- 
- article {
-   position: relative;
-   top: 40px;
-   min-height: 750px;
-   padding: 20px;
-   margin: 0;
-   border-radius: 5px;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- }
- body::before {
-   content: "";
-   position: fixed;
-   left: 0;
-   background-size: cover;
-   background-attachment: scroll;
-   width: 100%;
-   height: 100%;
-   background-image: url("background.jpg");
-   filter: blur(3px);
-   z-index: -1;
- }
- #user-icon {
-   margin-left: 15px;
-   position: relative;
-   top: 7.5px;
-   text-align: center;
-   justify-content: center;
- }
- .konto {
-   position: relative;
-   top: -5px;
- }
- .user-info {
-   display: none;
-   position: absolute;
-   top: calc(100%);
-   left: -80px;
-   width: 220px;
-   background-color: #383535;
-   padding: 10px;
-   border: 2px solid black;
-   text-align: center;
-   border-radius: 5px;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   cursor: default;
- }
- 
- .user-name {
-   color: orange;
-   position: relative;
-   top: -5px;
-   font-size: 17px;
-   letter-spacing: 1px;
- }
- .username {
-   position: relative;
-   top: -10px;
- }
- 
- hr {
-   width: 70%;
-   position: relative;
-   top: -20px;
-   margin-left: auto;
-   margin-right: auto;
- }
- .logout {
-   display: none;
-   cursor: pointer;
-   color: blueviolet;
-   position: relative;
-   top: -7.5px;
- }
- div.konto a {
-   display: block;
- }
- .konto:hover .user-info,
- .konto:hover .logout {
-   display: block !important;
-   cursor: default;
-   z-index: 1;
- }
- .konto:hover .logout {
-   cursor: pointer;
-   color: blueviolet;
-   text-decoration: underline;
- }
- .container {
-   margin-top: -20px;
-   margin-bottom: -20px;
-   padding: 50px 30px 10px 80px;
-   min-height: 750px;
-   width: 1350px;
-   margin-left: auto;
-   margin-right: auto;
-   z-index: auto;
- }
- .container::before {
-   content: "";
-   position: absolute;
-   left: 225px;
-   top: 0;
-   width: 1470px;
-   min-height: 800px;
-   z-index: -1;
-   background-color: #222222d3;
-   filter: blur(5px);
- }
- .container h1 {
-   text-align: center;
-   font-size: 28px;
-   margin-bottom: 30px;
-   margin-right: 5px;
-   margin-top: -40px;
- }
- .user-img {
-   position: relative;
-   top: 65px;
-   left: 160px;
-   border: 2px solid black;
-   border-radius: 5px;
- }
- .nick {
-   position: relative;
-   top: -150px;
-   left: 35px;
-   color: orange;
-   font-weight: bold;
-   font-size: 18px;
- }
- .user-rank {
-   color: white;
-   font-size: 18px;
-   position: relative;
-   top: 110px;
-   left: -15px;
- }
- #obstaw-form {
-   width: 1300px;
-   min-height: 680px;
-   margin-left: auto;
-   margin-right: auto;
-   position: relative;
-   left: 12.5%;
-   top: 45px;
-   height: auto;
- }
- select {
-   background-color: rgba(16, 32, 112, 0.795);
-   border: 1px solid black;
-   color: white;
-   z-index: auto;
-   width: 150px;
-   height: 25px;
-   text-align: center;
-   margin: 15px 20px 0 115px;
-   border-radius: 3px;
- }
- .mecz {
-   font-weight: bold;
-   font-size: 19px;
-   color: orange;
- }
- .vs {
-   color: white;
-   font-weight: bold;
-   font-size: 18px;
-   margin: 0 30px 0 30px;
- }
- hr.line {
-   color: gray;
-   width: 110px;
-   position: relative;
-   left: 100px;
-   margin-right: -30px;
-   top: 15px;
-   float: left;
- }
- ::placeholder {
-   text-align: center;
-   font-size: 15px;
-   color: rgb(201, 194, 194);
- }
- 
- input[type="text"] {
-   padding: 4px;
-   text-align: center;
-   border: 1px SOLID BLACK;
-   border-radius: 3px;
-   font-size: 16px;
- }
- 
- label {
-   position: relative;
-   top: -18px;
-   left: 320px;
-   font-weight: bold;
-   font-size: 19px;
- }
- input[value="Obstaw"] {
-   position: relative;
-   top: 30px;
-   color: black;
-   background-color: rgb(204, 182, 182);
-   left: 390px;
-   font-weight: bold;
-   letter-spacing: 1px;
-   font-size: 16px;
-   padding: 20px;
-   width: 200px;
-   border-radius: 10px;
- }
- input[value="Obstaw"]:hover {
-   background-color: rgba(156, 156, 243, 0.829);
-   cursor: pointer;
- }
- .spotkania {
-   position: relative;
-   left: 35px;
-   width: 200px;
-   text-align: justify;
-   top: 12.5px;
-   float: left;
- }
- .spotkania2 {
-   float: left;
-   text-align: justify;
-   left: 10px;
-   width: 200px;
-   position: relative;
-   margin-right: -150px;
-   top: 10px;
- }
- 
- .vs-div {
-   float: left;
-   position: relative;
-   right: 40px;
-   top: 12.5px;
- }
- .bet-error {
-   position: relative;
-   top: 150px;
-   font-size: 23px;
-   font-weight: bold;
-   left: 15%;
-   color: orange;
- }
- .stawka {
-   font-size: 22px;
-   color: white;
-   top: -105px;
-   left: 505px;
-   position: absolute;
- }
- .stawka-napis {
-   font-size: 22px;
-   color: orange;
-   top: -105px;
-   left: 410px;
-   position: absolute;
-   letter-spacing: 2px;
- }
- input:-webkit-autofill {
-   color: white;
-   -webkit-box-shadow: 0 0 0 50px rgba(16, 32, 112, 0.795) inset; /* Change the color to your own background color */
-   -webkit-text-fill-color: white;
- }
- 
- input:-webkit-autofill:focus {
-   color: white;
-   -webkit-box-shadow: 0 0 0 50px rgba(16, 32, 112, 0.795) inset; /* Change the color to your own background color */
-   -webkit-text-fill-color: white;
- }
- input {
-   background-color: rgba(16, 32, 112, 0.795);
-   color: white;
- }
- .Wynik {
-   width: 150px;
-   height: 20px;
-   border-radius: 5px;
-   position: relative;
-   text-align: center;
-   left: -100px;
- }
- .mistrz {
-   position: absolute;
-   top: -60px;
-   left: 220px;
-   width: 300px;
-   border-radius: 10px;
-   height: 30px;
-   color: rgb(247, 211, 158);
- }
- span[name="trophy1"],
- span[name="trophy2"] {
-   color: rgb(247, 211, 158);
-   font-size: 40px;
-   z-index: 1;
-   position: absolute;
-   top: -50px;
- }
- span[name="trophy1"] {
-   left: 270px;
- }
- span[name="trophy2"] {
-   position: absolute;
-   left: 660px;
- }
- #tabela {
-   margin-left: auto;
-   margin-right: auto;
-   text-align: center;
- }
- #tabela td,
- th {
-   width: 140px;
-   height: 50px;
-   padding: 5px;
- }
- 
- input[name="Delete-submit"] {
-   width: 140px;
-   height: 35px;
-   position: relative;
-   left: 587.5px;
-   margin-left: 10px;
-   top: -40px;
- }
- input[name="Delete-submit"]:hover {
-   cursor: pointer;
-   background-color: #1f3aa7d3;
- }
- #Wynik-1 {
-   left: 200px;
-   top: 15px;
- }
- #Wynik-2 {
-   left: 875px;
-   top: -30px;
- }
- .hr-wynik {
-   width: 50px;
-   position: relative;
-   left: 175px;
-   top: -5px;
- }
- #userSelect {
-   position: relative;
-   top: 70px;
-   left: 105px;
- }
- .error {
-   position: relative;
-   top: 200px;
-   left: 525px;
- }
-.bet-time{
-  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #fff; /* zmiana koloru czcionki */
+}
+
+h1,
+h2,
+h3,
+a {
+  color: #fff; /* zmiana koloru czcionki */
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.logo a {
+  margin-left: 30px;
+  font-size: 26px;
+  letter-spacing: 3px;
+}
+.logo2 {
+  position: absolute;
+  top: 50px;
+  left: 130px;
+  font-size: 13px;
+  color: red;
+}
+.header {
+  padding: 20px;
+  border-bottom: 1px solid #444; /* zmiana koloru granicy */
+  background-color: #111; /* zmiana koloru tła */
+  display: flex;
+  justify-content: space-between; /* ustawienie elementów w nagłówku na przeciwnych krańcach */
+  align-items: center; /* wyśrodkowanie elementów w pionie */
+}
+
+.main-nav {
+  display: flex;
+}
+
+.main-nav ul {
+  display: flex;
+}
+
+.main-nav a {
+  padding: 10px 15px;
+  text-align: center;
+  margin-right: 40px;
+  color: #ccc; /* zmiana koloru czcionki */
+}
+
+.main-nav a:hover {
+  color: #fff; /* zmiana koloru czcionki po najechaniu */
+}
+
+article {
   position: relative;
-  top:200px;
-  left: 305px;
+  top: 40px;
+  min-height: 750px;
+  padding: 20px;
+  margin: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+body::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  background-size: cover;
+  background-attachment: scroll;
+  width: 100%;
+  height: 100%;
+  background-image: url("background.jpg");
+  filter: blur(3px);
+  z-index: -1;
+}
+#user-icon {
+  margin-left: 15px;
+  position: relative;
+  top: 7.5px;
+  text-align: center;
+  justify-content: center;
+}
+.konto {
+  position: relative;
+  top: -5px;
+}
+.user-info {
+  display: none;
+  position: absolute;
+  top: calc(100%);
+  left: -80px;
+  width: 220px;
+  background-color: #383535;
+  padding: 10px;
+  border: 2px solid black;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: default;
+}
+
+.user-name {
+  color: orange;
+  position: relative;
+  top: -5px;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+.username {
+  position: relative;
+  top: -10px;
+}
+
+hr {
+  width: 70%;
+  position: relative;
+  top: -20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logout {
+  display: none;
+  cursor: pointer;
+  color: blueviolet;
+  position: relative;
+  top: -7.5px;
+}
+div.konto a {
+  display: block;
+}
+.konto:hover .user-info,
+.konto:hover .logout {
+  display: block !important;
+  cursor: default;
+  z-index: 1;
+}
+.konto:hover .logout {
+  cursor: pointer;
+  color: blueviolet;
+  text-decoration: underline;
+}
+.container {
+  margin-top: -20px;
+  margin-bottom: -20px;
+  padding: 50px 30px 10px 80px;
+  min-height: 750px;
+  width: 1350px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: auto;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  left: 225px;
+  top: 0;
+  width: 1470px;
+  min-height: 800px;
+  z-index: -1;
+  background-color: #222222d3;
+  filter: blur(5px);
+}
+.container h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  margin-right: 5px;
+  margin-top: -40px;
+}
+.user-img {
+  position: relative;
+  top: 65px;
+  left: 160px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.nick {
+  position: relative;
+  top: -150px;
+  left: 675px;
+  color: orange;
+  font-weight: bold;
+  font-size: 18px;
+}
+.user-rank {
+  color: white;
+  font-size: 18px;
+  position: relative;
+  top: 110px;
+  left: 617.5px;
+}
+#obstaw-form {
+  width: 1300px;
+  min-height: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  left: 12.5%;
+  top: 45px;
+  height: auto;
+}
+select {
+  background-color: rgba(16, 32, 112, 0.795);
+  border: 1px solid black;
+  color: white;
+  z-index: auto;
+  width: 150px;
+  height: 25px;
+  text-align: center;
+  margin: 15px 20px 0 115px;
+  border-radius: 3px;
+}
+.mecz {
+  font-weight: bold;
+  font-size: 19px;
+  color: orange;
+}
+.vs {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 30px 0 30px;
+}
+hr.line {
+  color: gray;
+  width: 110px;
+  position: relative;
+  left: 100px;
+  margin-right: -30px;
+  top: 15px;
+  float: left;
+}
+::placeholder {
+  text-align: center;
+  font-size: 15px;
+  color: rgb(201, 194, 194);
+}
+
+input[type="text"] {
+  padding: 4px;
+  text-align: center;
+  border: 1px SOLID BLACK;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+label {
+  position: relative;
+  top: -18px;
+  left: 320px;
+  font-weight: bold;
+  font-size: 19px;
+}
+input[value="Obstaw"] {
+  position: relative;
+  top: 30px;
+  color: black;
+  background-color: rgb(204, 182, 182);
+  left: 390px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 16px;
+  padding: 20px;
+  width: 200px;
+  border-radius: 10px;
+}
+input[value="Obstaw"]:hover {
+  background-color: rgba(156, 156, 243, 0.829);
+  cursor: pointer;
+}
+.spotkania {
+  position: relative;
+  left: 35px;
+  width: 200px;
+  text-align: justify;
+  top: 12.5px;
+  float: left;
+}
+.spotkania2 {
+  float: left;
+  text-align: justify;
+  left: 10px;
+  width: 200px;
+  position: relative;
+  margin-right: -150px;
+  top: 10px;
+}
+
+.vs-div {
+  float: left;
+  position: relative;
+  right: 40px;
+  top: 12.5px;
+}
+.bet-error {
+  position: relative;
+  top: 150px;
+  font-size: 23px;
+  font-weight: bold;
+  left: 15%;
+  color: orange;
+}
+.stawka {
+  font-size: 22px;
+  color: white;
+  top: -105px;
+  left: 505px;
+  position: absolute;
+}
+.stawka-napis {
+  font-size: 22px;
+  color: orange;
+  top: -105px;
+  left: 410px;
+  position: absolute;
+  letter-spacing: 2px;
+}
+input:-webkit-autofill {
+  color: white;
+  -webkit-box-shadow: 0 0 0 50px rgba(16, 32, 112, 0.795) inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: white;
+}
+
+input:-webkit-autofill:focus {
+  color: white;
+  -webkit-box-shadow: 0 0 0 50px rgba(16, 32, 112, 0.795) inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: white;
+}
+input {
+  background-color: rgba(16, 32, 112, 0.795);
+  color: white;
+}
+.Wynik {
+  width: 150px;
+  height: 20px;
+  border-radius: 5px;
+  position: relative;
+  text-align: center;
+  left: -100px;
+}
+.mistrz {
+  position: absolute;
+  top: -60px;
+  left: 220px;
+  width: 300px;
+  border-radius: 10px;
+  height: 30px;
+  color: rgb(247, 211, 158);
+}
+span[name="trophy1"],
+span[name="trophy2"] {
+  color: rgb(247, 211, 158);
+  font-size: 40px;
+  z-index: 1;
+  position: absolute;
+  top: -50px;
+}
+span[name="trophy1"] {
+  left: 270px;
+}
+span[name="trophy2"] {
+  position: absolute;
+  left: 660px;
+}
+#tabela {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#tabela td,
+th {
+  width: 140px;
+  height: 50px;
+  padding: 5px;
+}
+
+input[name="Delete-submit"] {
+  width: 140px;
+  height: 35px;
+  position: relative;
+  left: 587.5px;
+  margin-left: 10px;
+  top: -40px;
+}
+input[name="Delete-submit"]:hover {
+  cursor: pointer;
+  background-color: #1f3aa7d3;
+}
+#Wynik-1 {
+  left: 200px;
+  top: 15px;
+}
+#Wynik-2 {
+  left: 875px;
+  top: -30px;
+}
+.hr-wynik {
+  width: 50px;
+  position: relative;
+  left: 175px;
+  top: -5px;
+}
+#userSelect {
+  position: relative;
+  top: 70px;
+  left: 105px;
+}
+.error {
+  position: relative;
+  top: 200px;
+  left: 525px;
+}
+.bet-time{
+ font-size: 22px;
+ position: relative;
+ top:200px;
+ left: 305px;
 }
 .runda{
-  font-size: 19px;
-  position: relative;
-  left: 720px;
-  letter-spacing: 1px;
-  top: 55px;
-  color: orange;
+ font-size: 19px;
+ position: absolute;
+ left: 1520px;
+ letter-spacing: 1px;
+ top: 55px;
+ color: orange;
 }
 .rundaif{
-  font-size: 19px;
-  position: relative;
-  left: 200px;
-  top: 25px;
-  letter-spacing: 1px;
-  color: orange;
-  z-index: -1;
+ font-size: 19px;
+ position: absolute;
+ left: 1600px;
+ top: 55px;
+ letter-spacing: 1px;
+ color: orange;
+ z-index: -1;
+}
+.tekst{
+ position: relative;
+ top: -115px;
+ left: 250px;
+ font-size: 18px;
 }
